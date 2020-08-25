@@ -1,0 +1,31 @@
+<%- include('../layouts/adminheader.ejs')%>  
+<%- include('../partials/messages.ejs')%>  
+
+<div class="container-md"> 
+<h2 class="page-title">add a page</h2> 
+<a href="/admin/pages" class="btn btn-primary">back to all pages </a>
+<br><br> 
+<form action="/admin/addpage" method="POST"> 
+    <div class="form-group"   style="padding: 7;">
+        <label for="">title</label>
+        <input type="text" class="form-control" name="title" placeholder="title" value="<%=title %>">
+        
+
+    </div>
+    <div class="form-group"  style="padding: 7;">
+        <label for="">slug</label>
+        <input type="text" class="form-control" name="slug" placeholder="slug" value="<%=slug %>">
+        
+
+    </div>
+    <div class="form-group"   style="padding: 7;">
+        <label for="">contetnt</label>
+       <textarea name="content" class="form-control" placeholder="content" value="<%=content%>" cols="30" rows="10"></textarea>
+        
+
+    </div> 
+
+    <button class="btn btn-primary" > submit </button>
+
+</form>
+</div>

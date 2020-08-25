@@ -1,0 +1,32 @@
+<%- include('../layouts/adminheader.ejs')%>  
+<%- include('../partials/messages.ejs')%>  
+
+
+<div class="container-md"> 
+    
+<h2 class="page-title">Pages</h2> 
+<a href="/admin/addpage" class="btn btn-primary">add new page </a> 
+<table class="table table-striped"> 
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>edit</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let page of pages) { %> 
+            <tr>
+                <td><%= page.title %></td> 
+                <td><a href="/admin/admineditpage/<%= page._id %>">Edit</a></td> 
+                <% if(page.slug=="home") { %>
+                    <td></td>
+                    <% } else { %>
+                <td><a href="/admin/admineditpage/<%= page._id %>">delete</a></td>
+                <% } %>
+      <% } %>
+    </tbody>
+
+</table>
+
+</div>
