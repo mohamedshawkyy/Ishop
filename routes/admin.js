@@ -8,4 +8,5 @@ router.get('/addpage',admincontroller.getaddpage)
 
 //post routes 
 router.post('/addpage',admincontroller.addpage)
+router.post('/reorder',admincontroller.reorder)
 module.exports = router;

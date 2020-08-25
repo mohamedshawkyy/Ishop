@@ -1,5 +1,9 @@
 <%- include('../layouts/adminheader.ejs')%>  
 <%- include('../partials/messages.ejs')%>  
+<head>
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
 
 
 <div class="container-md"> 
@@ -8,7 +12,7 @@
 <a href="/admin/addpage" class="btn btn-primary">add new page </a> 
 <table class="table table-striped"> 
     <thead>
-        <tr>
+        <tr class="home">
             <th>title</th>
             <th>edit</th>
             <th>delete</th>
@@ -16,7 +20,7 @@
     </thead>
     <tbody>
         <% for(let page of pages) { %> 
-            <tr>
+            <tr id="id_<%=page._id%>"  >
                 <td><%= page.title %></td> 
                 <td><a href="/admin/admineditpage/<%= page._id %>">Edit</a></td> 
                 <% if(page.slug=="home") { %>
@@ -29,4 +33,18 @@
 
 </table>
 
-</div>
+</div> 
+
+<script>  
+ $(function() {
+            $( "tbody" ).sortable({
+          update:function (){
+            var ids =$( "tbody" ).sortable("serialize");
+            var url ="/admin/reorder" 
+             $.post(url,ids);
+    }
+            });
+         }); 
+
+
+</script>

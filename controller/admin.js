@@ -79,4 +79,28 @@ exports.getpages = async function (req,res,next){
         })
     })
 
+} 
+
+exports.reorder = async function (req,res ){
+    var id = req.body['id[]'];
+    var count = 0; 
+    
+  for(var i = 0; i<id.length;i++){ 
+      var cid=id[i];    
+      count++; 
+        (function(count){
+
+            Page.findById(cid,function(err ,page){
+                console.log(page)
+                page.sorting= count;
+                page.save(function(err){
+                    if (err )
+                        return console.log(err)
+                });
+            });
+        })(count); 
+   
+
+    }
+   // console.log(id) 
 }
