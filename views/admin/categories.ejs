@@ -1,0 +1,47 @@
+<%- include('../layouts/adminheader.ejs')%>  
+
+<%- include('../partials/messages.ejs')%>  
+<head>
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<% if(categories.length > 0) {%>
+
+<div class="container-md"> 
+    
+<h2 class="page-title">categories</h2> 
+<a href="/admin/addcategory" class="btn btn-primary">add new category </a> 
+<table class="table table-striped"> 
+    <thead>
+        <tr class="home">
+            <th>title</th>
+            <th>edit</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let category of categories) { %> 
+            <tr id="id_<%=category._id%>"  >
+                <td><%= category.title %></td> 
+                <td><a href="/admin/editcategory/<%= category._id %>">Edit</a></td> 
+            
+                <td><a class="cd" href="/admin/deletecategory/<%=category._id %>">delete</a></td>
+               
+      <% } %>
+    </tbody>
+
+</table>
+
+</div> 
+
+
+
+<% }else { %>  
+<div class="container-md">
+  <h2 class="page-title">categories</h2> 
+<a href="/admin/addcategory" class="btn btn-primary">add new category </a> 
+<br><br>  
+<strong><h3>Add your first category...!</h3></strong>
+<%}%> 
+</div>
+<%- include('../layouts/adminfooter.ejs')%> 

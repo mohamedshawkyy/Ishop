@@ -1,0 +1,28 @@
+<%- include('../layouts/adminheader.ejs')%>  
+<%- include('../partials/messages.ejs')%>  
+
+<div class="container-md"> 
+<h2 class="page-title">edit a category</h2> 
+<a href="/admin/categories" class="btn btn-primary">back to all categories </a>
+<br><br> 
+<form action="/admin/updatecategory" method="POST"> 
+    <div class="form-group"   style="padding: 7;">
+        <label for="">title</label>
+        <input type="text" class="form-control" name="title" placeholder="title" value="<%=category.title %>">
+        
+
+    </div>
+    <div class="form-group"  style="padding: 7;">
+        <label for="">slug</label>
+        <input type="text" class="form-control" name="slug" placeholder="slug" value="<%=category.slug %>">
+        
+
+    </div>
+  
+    <input type="hidden" name="id" value="<%= category.id%>">
+
+    <button class="btn btn-primary" > submit </button>
+
+</form>
+</div>
+<%- include('../layouts/adminfooter.ejs')%> 
