@@ -7,7 +7,8 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser'); 
 var flash = require('connect-flash');
 //const flash = require('req-flash')
-const adminroute= require('./routes/admin'); 
+const adminroute= require('./routes/admin');  
+
 
 
 //init app 
@@ -39,7 +40,8 @@ app.get('/',function(req,res){
   } )
 })  
 
-app.use('/admin',adminroute);
+app.use('/admin',adminroute); 
+
   
 //start server   
 app.listen(3000,()=>{

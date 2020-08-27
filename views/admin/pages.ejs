@@ -1,4 +1,5 @@
 <%- include('../layouts/adminheader.ejs')%>  
+
 <%- include('../partials/messages.ejs')%>  
 <head>
     <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -22,11 +23,11 @@
         <% for(let page of pages) { %> 
             <tr id="id_<%=page._id%>"  >
                 <td><%= page.title %></td> 
-                <td><a href="/admin/admineditpage/<%= page._id %>">Edit</a></td> 
+                <td><a href="/admin/editpage/<%= page._id %>">Edit</a></td> 
                 <% if(page.slug=="home") { %>
                     <td></td>
                     <% } else { %>
-                <td><a href="/admin/admineditpage/<%= page._id %>">delete</a></td>
+                <td><a class="cd" href="/admin/deletepage/<%= page._id %>">delete</a></td>
                 <% } %>
       <% } %>
     </tbody>
@@ -34,6 +35,7 @@
 </table>
 
 </div> 
+
 
 <script>  
  $(function() {
@@ -48,3 +50,4 @@
 
 
 </script>
+<%- include('../layouts/adminfooter.ejs')%> 
