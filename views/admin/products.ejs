@@ -1,0 +1,68 @@
+<%- include('../layouts/adminheader.ejs')%>  
+
+<%- include('../partials/messages.ejs')%>  
+<head>
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<% if(products.length > 0) {%>
+
+<div class="container-md"> 
+    
+<h2 class="page-title">products</h2> 
+<a href="/admin/products/addproduct" class="btn btn-primary">add new product </a> 
+<form action="/admin/products/deletemulti" method="post" >
+<table class="table table-striped"> 
+    <thead>
+        <tr class="home">
+            <th>select</th>
+            <th>product</th>
+            <th>price</th>
+            <th>category</th>
+            <th>product Image</th>
+            <th>edit</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let product of products) { %> 
+            <tr id="id_<%=product._id%>"  >
+                <td> 
+                     <div class="checkbox">
+                    <label><input name="selected" type="checkbox" value="<%= (product._id) %>"> </label>
+                    </div>
+                </td>
+                <td><%= product.title %></td> 
+                <td><%= parseFloat(product.price).toFixed(2) %></td> 
+                <td><%= product.category %></td> 
+                <td>
+                    <% if (product.image=="") { %> 
+                        <img id="images" src="/images/noimg.png" >
+                        <% } else { %>
+                            <img id="images" src="/product-images/<%= product._id %>/<%=product.image %>" >
+                         <% }  %>
+                </td>
+                <td><a href="/admin/products/editproduct/<%= product._id %>">Edit</a></td> 
+            
+                <td><a class="cd" href="/admin/products/deleteproduct/<%=product._id %>">delete</a></td>
+               
+      <% } %>
+    </tbody>
+
+</table> 
+<div class="text-center" style="float: left;"><button type="submit" class="btn btn-danger" style="color: white;">Delete selected products</button></div>
+</form>
+
+</div> 
+
+
+
+<% }else { %>  
+<div class="container-md">
+  <h2 class="page-title">products</h2> 
+<a href="/admin/products/addproduct" class="btn btn-primary">add new product </a> 
+<br><br>  
+<strong><h3>Add your first product...!</h3></strong>
+<%}%> 
+</div>
+<%- include('../layouts/adminfooter.ejs')%> 

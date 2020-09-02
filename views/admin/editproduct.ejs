@@ -1,0 +1,98 @@
+<%- include('../layouts/adminheader.ejs')%>  
+<%- include('../partials/messages.ejs')%>  
+
+<div class="container-md"> 
+<h2 class="page-title">edit a product</h2> 
+<a href="/admin/products" class="btn btn-primary">back to all products </a>
+<br><br> 
+<form action="/admin/products/editproduct" method="POST" enctype="multipart/form-data"> 
+
+    <div class="form-group"   style="padding: 7;">
+        <label for="">title</label>
+        <input type="text" class="form-control" name="title" placeholder="title" value="<%=title %>"> 
+    </div> 
+    <div class="form-group"   style="padding: 7;">
+        <label for="">Description</label>
+       <textarea name="desc"  class="form-control" placeholder="description" cols="20" rows="10"><%=desc%></textarea>
+        
+
+    </div>  
+    <div class="form-group"  style="padding: 7;">
+       <label for="">Category</label>
+       <select name="category" class="form-contrp;">
+           <% for (let category of categories) { %> 
+            <option > <%=category.title%> </option>
+            <% } %> 
+       </select>
+
+    </div>
+    <div class="form-group"  style="padding: 7;">
+        <label for="">Price</label>
+        <input type="text" class="form-control" name="price" placeholder="price" value="<%=price %>">
+        
+    </div>
+    <div class="form-group"  style="padding: 7;">
+        <label for="">image</label>
+        <input type="file" class="form-control" name="image" id="img" >  
+        <%if(product.image) { %>
+        <img src="/product-images/<%= product._id %>/<%=product.image %>" class="imgedit" id="imgprev" >
+         <%} else { %>  
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" class="imgedit" id="imgprev" >
+            <%} %>  
+    </div>
+        <input type="hidden" name="pimage" value="<%= image %>">
+    <input type="hidden" name="id" value="<%= product.id%>">
+    <button class="btn btn-primary" > submit </button>
+
+</form>   
+<ul class="gallery">
+    <% galleryimages.forEach(function(image){ %>
+    <% if (image != "thumbs") { %>
+    <li>
+        <img src="/product-images/<%= product.id %>/gallery/thumbs/<%= image %>" alt="">&nbsp;
+        <a class="cd" href="/admin/products/deleteimage/<%= image %>?id=<%= product.id %>">delete</a>
+    </li>
+    <% } %>
+    <% }); %>
+</ul>
+
+<form action="/admin/products/productgallery/<%= product.id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload">
+    </div>
+</form>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/basic.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/dropzone.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/dropzone.js"></script>
+
+<script>
+    function readurl(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#imgprev").attr('src',e.target.result).width(100).height(100);
+                
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#img').change(function(){
+        readurl(this);
+    })
+
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "image/*",
+        init: function() {
+            this.on("queuecomplete", function(file) {
+               setTimeout(function() {
+                location.reload()
+                }, 1000); 
+            });
+        }
+    }
+</script>
+<%- include('../layouts/adminfooter.ejs')%> 
