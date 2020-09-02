@@ -7,9 +7,11 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser'); 
 var flash = require('connect-flash');
 //const flash = require('req-flash')
+
 var fileupload = require('express-fileupload')
 const adminroute= require('./routes/admin');  
 const adminproductroute = require('./routes/products');
+
 
 
 
@@ -47,6 +49,7 @@ app.get('/',function(req,res){
 
 app.use('/admin',adminroute); 
 app.use('/admin/products',adminproductroute);
+
 
   
 //start server   
