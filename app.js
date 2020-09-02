@@ -7,7 +7,10 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser'); 
 var flash = require('connect-flash');
 //const flash = require('req-flash')
-const adminroute= require('./routes/admin'); 
+var fileupload = require('express-fileupload')
+const adminroute= require('./routes/admin');  
+const adminproductroute = require('./routes/products');
+
 
 
 //init app 
@@ -17,6 +20,9 @@ connectDB();
 
 //static folder
 app.use(express.static('public'))
+//fileupload middleware 
+app.use(fileupload());
+
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser('secret'));
 app.use(session({cookie: { maxAge: 6000 }}));
@@ -39,7 +45,9 @@ app.get('/',function(req,res){
   } )
 })  
 
-app.use('/admin',adminroute);
+app.use('/admin',adminroute); 
+app.use('/admin/products',adminproductroute);
+
   
 //start server   
 app.listen(3000,()=>{
